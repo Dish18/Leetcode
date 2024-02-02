@@ -1,22 +1,17 @@
 class Solution {
     public int reverse(int x) {
-        int num = Math.abs(x);  
-        
-        int rev = 0;  
-        
-        while (num != 0) {
-            int ld = num % 10;  // Last digit nikala
-            
-            // Overflow check
-            if (rev > (Integer.MAX_VALUE - ld) / 10) {
-                return 0;  // Agar overflow hua, toh 0 return kardo
-            }
-            
-            rev = rev * 10 + ld;  // Reverse mein digit ko add kiya
-            num = num / 10;  // Last digit hata diya, next iteration ke liye
+        int rem=0;
+        double sum=0;
+        while(x!=0){
+            rem = x%10;
+            if(sum*10+rem>=Integer.MAX_VALUE|| sum*10+rem<=Integer.MIN_VALUE){
+                sum=0;
+                break;
+            } 
+            sum = sum*10+rem;
+            x=x/10;
         }
-        
-        return (x < 0) ? (-rev) : rev;  // Original number ke sign ke hisaab se result diya
-        
+        int temp = (int)sum;
+        return temp;
     }
 }
